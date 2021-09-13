@@ -1,16 +1,17 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const HelloWorldApp = () => {
+import CameraScreen from './CameraScreen';
+
+const App = createNativeStackNavigator();
+
+const App = () => {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
-      }}>
-      <Text>Hello, world!</Text>
-    </View>
-  )
-}
-export default HelloWorldApp;
+    <NavigationContainer>
+      {/* Rest of your app code */}
+    </NavigationContainer>
+  );
+};
+
+export default App;
