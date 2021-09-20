@@ -72,4 +72,5 @@ buck-out/
 /ios/Pods/
 node_modules
 
+# Hide config
 src/firebase/config.js
