@@ -1,30 +1,16 @@
 import React from 'react';
-import { View, Image , Text } from 'react-native';
+import { View, Image , Text, Button } from 'react-native';
 import { globalStyles,globalTextStyle } from '../styles/global'
-import { initDatabase } from '../utils/database'
+import Scan from './camera';
 
-class HomeScreen extends React.Component {
+function HomeScreen({ route, navigation }) {
   
-    componentDidMount(){
-      this._isMounted = true;
-      this.setState({
-        isLoading: true
-      });
-    
-    this.setState({
-        isLoading: false
-      });
-    }
-  
-    componentWillUnmount() {
-      this._isMounted = false;
-    }
-  
-    render(){
-      return (
+    const { user } = route.params;
+
+    return (
         <View >
   
-          <Text style={globalTextStyle.welcome}>Welcome to our Barcode Scanner App!</Text>
+          <Text style={globalTextStyle.welcome}>Welcome {user.fullName} to our Barcode Scanner App!</Text>
             <View
                 style={{
                     justifyContent: "center",
@@ -33,11 +19,12 @@ class HomeScreen extends React.Component {
                 }}
             >
             </View>
-  
+        
+          <Button
+          title="Scan Food"
+          onPress={() => navigation.navigate('Scan', { screen: 'Scanner', params: {user},})}
+          />
         </View>
-      );
-    }
-  
-  }
-  
-  export default HomeScreen;
+      );  
+}
+export default HomeScreen;

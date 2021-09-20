@@ -1,91 +1,126 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import {decode, encode} from 'base-64'
+if (!global.btoa) {  global.btoa = encode }
+if (!global.atob) { global.atob = decode }
+
 import { Icon } from 'react-native-elements';
+
 import HomeScreen from './screens/HomeScreen';
-import {AuthScreen} from './screens/auth';
-import {RealtimeDBScreen} from './screens/realtimeDatabase';
-import {CloudFirestoreScreen} from './screens/cloudFirestore';
-import {CloudStorageScreen} from './screens/cloudStorage';
-import {AdmobScreen} from './screens/admob';
-import {FunctionsScreen} from './screens/functions';
-import {AnalyticsScreen} from './screens/analytics';
-import {analytics} from './Setup';
-import Scan from './components/camera';
+import Scan from './screens/camera';
 import ResultsScreen from './screens/ResultsScreen';
+import SavedScreen from './screens/SavedScreen';
+import LoginScreen from './screens/LoginScreen';
+import RegistrationScreen from './screens/RegistrationScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-const App = () => {
-  const routeNameRef = React.useRef();
-  const navigationRef = React.useRef();
-  return (
-    <NavigationContainer
-      ref={navigationRef}
-      onReady={() =>
-        (routeNameRef.current = navigationRef.current.getCurrentRoute().name)
-      }
-      onStateChange={() => {
-        const previousRouteName = routeNameRef.current;
-        const currentRouteName = navigationRef.current.getCurrentRoute().name;
-
-        if (previousRouteName !== currentRouteName) {
-          // The line below uses the expo-firebase-analytics tracker
-          // https://docs.expo.io/versions/latest/sdk/firebase-analytics/
-          // Change this line to use another Mobile analytics SDK
-
-          analytics().setCurrentScreen(currentRouteName);
-        }
-
-        // Save the current route name for later comparision
-        routeNameRef.current = currentRouteName;
-      }}>
-      <Stack.Navigator headerMode="none" initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Auth" component={AuthScreen} />
-        <Stack.Screen name="RealtimeDB" component={RealtimeDBScreen} />
-        <Stack.Screen
-          name="CloudFirestoreDB"
-          component={CloudFirestoreScreen}
-        />
-        <Stack.Screen name="CloudStorage" component={CloudStorageScreen} />
-        <Stack.Screen name="Admob" component={AdmobScreen} />
-        <Stack.Screen name="Functions" component={FunctionsScreen} />
-        <Stack.Screen name="Analytics" component={AnalyticsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  )
 function HomeStack(){
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Barcode Scanner App" component={HomeScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Product Information" component={ResultsScreen} />
+    </Stack.Navigator>
+  );
+}
+
+function AccountStack(){
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Login Page" component={LoginScreen} />
+      <Stack.Screen name="Registration" component={RegistrationScreen} />
     </Stack.Navigator>
   )
 }
+
+function ScanStack(){
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Scanner" component={Scan} />
+    </Stack.Navigator>
+  )
+}
+
+function SavedStack(){
+  return(
+    <Stack.Navigator>
+      <Stack.Screen name="Saved Items" component={SavedScreen} />
+    </Stack.Navigator>
+  )
+}
+
 export default function App(){
+
+  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null)
+
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen
-        name="Main"
-        component={HomeStack}
-        options={{
-          tabBarLabel: "Home",
-          tabBarIcon: () => <Icon name="home" type="ionicons" />
-        }} />
-        <Tab.Screen
-        name="Scan"
-        component={Scan}
-        options={{
-          tabBarLabel: "Scanner",
-          tabBarIcon: () => <Icon name="barcode" type="antdesign" />
-        }}/>
-    </Tab.Navigator>
-  </NavigationContainer>
+          <Tab.Navigator>
+          <Tab.Screen name="Login" component={AccountStack} options={{tabBarLabel: "Login", tabBarIcon: () => <Icon name="login" type="SimpleLineIcons" /> }} />
+          <Tab.Screen
+            name="Main"
+            component={HomeStack}
+            options={{
+              tabBarLabel: "Home",
+              tabBarIcon: () => <Icon name="home" type="ionicons" />
+          }} />
+          <Tab.Screen
+            name="Scan"
+            component={ScanStack}
+            options={{
+              tabBarLabel: "Scanner",
+              tabBarIcon: () => <Icon name="barcode" type="antdesign" />
+          }}/>
+          <Tab.Screen
+            name="Saved"
+            component={SavedStack}
+            options={{
+              tabBarLabel: "Saved",
+              tabBarIcon: () => <Icon name="star" type="antdesign" />
+          }}/>
+          </Tab.Navigator>
+    </NavigationContainer>
   );
 
-
-}}
+  /*return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        { user ? (
+          <Tab.Navigator>
+          <Tab.Screen
+            name="Home"
+            component={HomeStack}
+            options={{
+              tabBarLabel: "Home",
+              tabBarIcon: () => <Icon name="home" type="ionicons" />
+          }} />
+          <Tab.Screen
+            name="Scan"
+            component={Scan}
+            options={{
+              tabBarLabel: "Scanner",
+              tabBarIcon: () => <Icon name="barcode" type="antdesign" />
+          }}/>
+          <Tab.Screen
+            name="Saved"
+            component={SavedStack}
+            options={{
+              tabBarLabel: "Saved",
+              tabBarIcon: () => <Icon name="star" type="antdesign" />
+          }}/>
+          </Tab.Navigator>
+        ) : (
+          <>
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Registration" component={RegistrationScreen} />
+          </>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );*/
+}

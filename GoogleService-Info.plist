@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>752428129862-j5uh432etcjcee9j3dncrofroronlulb.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.752428129862-j5uh432etcjcee9j3dncrofroronlulb</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCu8Exc-khbjeQ6ZnHoqR6CFS-qlgFBiAw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>752428129862</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.reactnativefirebase</string>
+	<key>PROJECT_ID</key>
+	<string>sw14miniproject</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sw14miniproject.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:752428129862:ios:69b146cddb92abb2403447</string>
+	<key>DATABASE_URL</key>
+	<string>https://sw14miniproject-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

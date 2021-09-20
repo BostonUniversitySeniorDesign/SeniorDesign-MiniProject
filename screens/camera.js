@@ -5,9 +5,10 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import { withNavigation } from "react-navigation";
 //import nodejs from 'nodejs-mobile-react-native';
 
-function camera({ navigation }) {
+function camera({ route, navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const { user } = route.params;
 
   useEffect(() => {
     (async () => {
@@ -23,8 +24,7 @@ function camera({ navigation }) {
     Vibration.vibrate()
     console.log('Type: ' + type + '\nData: ' + data)
 	  //Reads the data into result screen
-      navigation.navigate('Product Information', {
-        data: data, 
+      navigation.navigate('Main', { screen: 'Product Information', params: { data:data, user:user },
       });
 /*
     data = data.substring(1);
