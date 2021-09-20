@@ -16,4 +16,8 @@ if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
 
+var config = {
+  FDA_API : rF0UJLafWZHGG91JRLNLIUXbjExmPH9hnyAU98qe
+}
+
 export { firebase };

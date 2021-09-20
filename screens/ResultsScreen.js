@@ -12,11 +12,12 @@ function ResultsScreen({ route, navigation }) {
   const [data2, setData] = useState('');
   const [entities, setEntities] = useState([]);
   const entityRef = firebase.firestore().collection('SavedFood');
+  var fdakey = config.FDA_API;
 
   useEffect(() => {
     (async () => {
         const response = await fetch(
-          'https://api.nal.usda.gov/fdc/v1/foods/search?query=' + data + '&pageSize=2&api_key=rF0UJLafWZHGG91JRLNLIUXbjExmPH9hnyAU98qe'
+          'https://api.nal.usda.gov/fdc/v1/foods/search?query=' + data + '&pageSize=2&api_key=' + fdakey
            );
            const dataGrabbed = await response.json();
           //  console.log(dataGrabbed);
