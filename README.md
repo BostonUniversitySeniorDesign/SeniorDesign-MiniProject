@@ -3,7 +3,7 @@ SW Mini Project<br/>
 Authors: Talha Kamran, Stefan Wong<br/>
 Team SW-14
 
-[Link to video demo](https://drive.google.com/file/d/1gWFUead9xo7gFiAPwr46cgt28a6sLp_X/view?usp=sharing)
+[Link to video demo](https://drive.google.com/file/d/1gWFUead9xo7gFiAPwr46cgt28a6sLp_X/view?usp=sharing)<br/>
 [Link to folder containing screenshots of the app](https://drive.google.com/drive/folders/1H9DuCDi7FGeCP9kGSAlNwipx-lXwoFNf?usp=sharing)
 
 ## Food Barcode Scanning App
